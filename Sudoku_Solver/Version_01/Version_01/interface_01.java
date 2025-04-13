@@ -121,22 +121,12 @@ public class interface_01 extends javax.swing.JFrame {
 
         cell_1_1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_1_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cell_1_1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cell_1_1ActionPerformed(evt);
-            }
-        });
 
         cell_1_2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_1_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         cell_1_3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_1_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cell_1_3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cell_1_3ActionPerformed(evt);
-            }
-        });
 
         cell_1_4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_1_4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -281,11 +271,6 @@ public class interface_01 extends javax.swing.JFrame {
 
         cell_6_6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_6_6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cell_6_6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cell_6_6ActionPerformed(evt);
-            }
-        });
 
         cell_6_7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_6_7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -301,11 +286,6 @@ public class interface_01 extends javax.swing.JFrame {
 
         cell_7_2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_7_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cell_7_2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cell_7_2ActionPerformed(evt);
-            }
-        });
 
         cell_7_3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_7_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -318,11 +298,6 @@ public class interface_01 extends javax.swing.JFrame {
 
         cell_7_6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_7_6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cell_7_6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cell_7_6ActionPerformed(evt);
-            }
-        });
 
         cell_7_7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_7_7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -344,11 +319,6 @@ public class interface_01 extends javax.swing.JFrame {
 
         cell_8_4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_8_4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cell_8_4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cell_8_4ActionPerformed(evt);
-            }
-        });
 
         cell_8_5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         cell_8_5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -786,31 +756,7 @@ public class interface_01 extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
-
-    private void cell_1_3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
-    private void cell_6_6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
-    private void cell_8_4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
-    private void cell_7_2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
-    private void cell_1_1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
-    private void cell_7_6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
+    }                                                         
 
     private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
