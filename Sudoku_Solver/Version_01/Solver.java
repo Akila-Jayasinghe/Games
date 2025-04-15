@@ -6,7 +6,7 @@
   * @author Akila Jayasinghe
   */
 
- public class Sudoku_Solver {
+ public class Solver {
 
 
 
@@ -21,7 +21,7 @@
 
  
     // Constructor
-    public Sudoku_Solver(int[][] grid, int min, int max) {
+    public Solver(int[][] grid, int min, int max) {
         this.grid = grid;
         this.possible = new int[max][max][max];
         this.min = min;

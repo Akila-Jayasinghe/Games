@@ -4,15 +4,18 @@ package Version_01;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
 
-public class interface_01 extends javax.swing.JFrame {
+public class SudokuSolver extends javax.swing.JFrame {
 
-    public interface_01() {
+    public SudokuSolver() {
         initComponents();
+        setTitle("Sudoku Solver - by Akila Jayasinghe");
+        setIconImage(new ImageIcon("icon.png").getImage());
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
@@ -816,7 +819,7 @@ public class interface_01 extends javax.swing.JFrame {
             }
         }
 
-        Sudoku_Solver ss = new Sudoku_Solver(grid_result, 1, 9);
+        Solver ss = new Solver(grid_result, 1, 9);
         
         // Solved
         if (ss.solveSudoku()) {
@@ -894,19 +897,19 @@ public class interface_01 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(interface_01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SudokuSolver.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(interface_01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SudokuSolver.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(interface_01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SudokuSolver.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(interface_01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SudokuSolver.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new interface_01().setVisible(true);
+                new SudokuSolver().setVisible(true);
             }
         });
     }
