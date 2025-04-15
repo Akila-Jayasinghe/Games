@@ -19,35 +19,6 @@
 
 
 
-
-    // // Main method for testing purpose of the Sudoku_Solver.java class
-    // public static void main(String[] args) {
-
-    //     int[][] test_grid = {
-    //         {0, 7, 0,   0, 0, 0,   0, 0, 3},
-    //         {0, 2, 6,   0, 0, 3,   9, 0, 0},
-    //         {1, 0, 3,   2, 8, 0,   0, 0, 5},
-
-    //         {0, 0, 0,   0, 3, 0,   0, 0, 0},
-    //         {9, 3, 5,   4, 2, 6,   0, 0, 0},
-    //         {0, 0, 0,   0, 9, 0,   3, 5, 0},
-
-    //         {0, 8, 7,   0, 4, 2,   0, 0, 0},
-    //         {0, 0, 0,   8, 0, 9,   0, 0, 2},
-    //         {2, 4, 0,   0, 0, 0,   6, 0, 8},
-    //     };
-
-    //     Sudoku_Solver ss = new Sudoku_Solver(test_grid, 1, 9);
-    //     System.out.println();
-    //     ss.printGrid();
-    //     ss.solveSudoku();
-    //     ss.printGrid();
-
-    // }
-
-
-
-
  
     // Constructor
     public Sudoku_Solver(int[][] grid, int min, int max) {
@@ -415,50 +386,6 @@
         }
     }
 
-
-
-
-
-    // Print a sample array for testing
-    private void printArray(int[] array, String title) {
-        System.out.println("Array " + title.toLowerCase() + "...");
-        for (int i=0; i<array.length; i++) {
-            System.out.printf("%d ", array[i]);
-        }
-        System.out.println("\n");
-    }
-
-
-
-
-
-    // Print the initial sudoku grid in the terminal
-    private void printGrid() {
-        for (int row=0; row<9; row++) {
-            for (int col=0; col<9; col++) {
-                System.out.print(grid[row][col] + (((col+1)%3 == 0) ? "   " : " "));
-            }
-            System.out.println(((((row+1)%3 == 0) && (row < 8)) ? "\n" : ""));
-        }
-    }
-
-
-
-
-
-    // Print the calculated all possible values for each cell in the terminal
-    private void printPossible() {
-        for (int i=0; i<possible.length; i++) {
-            System.out.printf("Row no. %02d : \n", i+1);
-            for (int j=0; j<possible[i].length; j++) {
-                for (int k=0; k<possible[i][j].length; k++) {
-                    System.out.printf("%s ", ((possible[i][j][k]==0) ? "-" : possible[i][j][k]));
-                }
-                System.out.printf(" %d \n", CountPossible(possible[i][j]));
-            }
-            System.out.println("\n");
-        }
-    }
 
 
 
