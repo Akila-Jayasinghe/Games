@@ -1,6 +1,7 @@
 
 package Version_01;
 
+
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class SudokuSolver extends javax.swing.JFrame {
     public SudokuSolver() {
         initComponents();
         setTitle("Sudoku Solver - by Akila Jayasinghe");
-        setIconImage(new ImageIcon("icon.png").getImage());
+        setIconImage(new ImageIcon("icon.ico").getImage());
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
@@ -862,7 +863,7 @@ public class SudokuSolver extends javax.swing.JFrame {
                 cell.setForeground(Color.BLUE);
                 ((Timer)e.getSource()).stop();
 
-                new Timer(1000, ev -> {}).start();
+                // new Timer(1000, ev -> {}).start();
             }
         });
         timer.start();
