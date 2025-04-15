@@ -2,6 +2,9 @@
 
 A Java-based Sudoku puzzle solver with intuitive GUI, supporting both manual input and automatic solving.
 
+## Tools
+- User Interface was designed by using Java swing UI designer in Apache NetBeans
+
 
 ## 🚀 Features
 - ✔️ Solves 9x9 Sudoku puzzles with 100% accuracy
