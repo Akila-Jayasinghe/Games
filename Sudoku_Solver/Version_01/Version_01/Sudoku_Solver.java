@@ -14,6 +14,7 @@
 
     private int[][] grid;       // Store the initial grid and final grid
     private int[][][] possible; // Store the all possibility grid
+    private final int min, max, blockLen;
 
 
 
@@ -23,9 +24,9 @@
     public static void main(String[] args) {
 
         int[][] test_grid = {
-            {7, 9, 0,   0, 0, 0,   0, 0, 4},
-            {0, 4, 2,   5, 7, 0,   0, 0, 0},
-            {0, 0, 0,   0, 2, 4,   0, 6, 7},
+            {0, 3, 9,   0, 0, 7,   0, 0, 5},
+            {0, 7, 0,   9, 1, 0,   0, 2, 0},
+            {5, 4, 0,   0, 0, 0,   0, 0, 1},
 
             {2, 6, 4,   3, 8, 9,   0, 0, 0},
             {0, 0, 9,   0, 0, 0,   3, 8, 0},
@@ -36,22 +37,32 @@
             {0, 8, 0,   6, 4, 0,   0, 9, 0},
         };
 
-        Sudoku_Solver ss = new Sudoku_Solver(test_grid);
-        ss.printGrid();
-
-        // int[] test_Array = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        // ss.printArray(test_Array, "before removal");
-        // ss.RemoveElement(test_Array, 9);
-        // ss.printArray(test_Array, "after removal");
-
+        Sudoku_Solver ss = new Sudoku_Solver(test_grid, 1, 9);
 
         
         if (ss.CheckValidInit()) {
             ss.CalculatePossible();
-            ss.printPossible();
-            ss.FirstCheck();
+
+            System.out.println();
+
+            System.out.println("Given Sudoku grid...");
             ss.printGrid();
-            ss.printPossible();
+            System.out.println();
+
+            int iter = 0;
+            while (!ss.isSolved()) {
+                iter++;
+                ss.FirstCheck();
+                ss.SecondCheck();
+                ss.ThirdCheck();
+                ss.FourthCheck();
+            }
+
+            System.out.println("Solved Sudoku grid...");
+            ss.printGrid();
+            System.out.printf("Performed iteration count :- %03d \n\n", iter);
+            
+            
         } else {
             System.out.println("Invalid initial sudoku grid");
         }
@@ -64,9 +75,12 @@
 
  
     // Constructor
-    public Sudoku_Solver(int[][] grid) {
+    public Sudoku_Solver(int[][] grid, int min, int max) {
         this.grid = grid;
         this.possible = new int[9][9][9];
+        this.min = min;
+        this.max = max;
+        blockLen = (int)(Math.sqrt(max));
     }
 
 
@@ -104,7 +118,7 @@
         for (int i=0; i<grid.length; i++) {
             for (int j=0; j<grid[i].length; j++) {
                 if (grid[i][j] == 0) {
-                    for (int k=0, l=1; (k<possible[i][j].length) && (l<=9); l++) {
+                    for (int k=0, l=min; (k<possible[i][j].length) && (l<=max); l++) {
                         if (isPossibleInRow(i, j, l) && isPossibleInCol(i, j, l) && isPossibleInBlock(i, j, l)) {
                             possible[i][j][k++] = l;
                         }
@@ -159,8 +173,8 @@
 
     // Check whether the given cell is repeated within that 3x3 block
     private boolean isInBlock(int row, int col) {
-        for (int i=(3*(row/3)); ((i<((3*(row/3))+3)) && (i<grid.length)); i++) {
-            for (int j=(3*(col/3)); ((j<((3*(col/3))+3)) && (j<grid[row].length)); j++) {
+        for (int i=(blockLen*(row/blockLen)); ((i<((blockLen*(row/blockLen))+blockLen)) && (i<grid.length)); i++) {
+            for (int j=(blockLen*(col/blockLen)); ((j<((blockLen*(col/blockLen))+blockLen)) && (j<grid[row].length)); j++) {
                 if ((grid[i][j] == grid[row][col]) && (i != row) && (j != col)) {
                     return true;
                 }
@@ -203,8 +217,8 @@
 
     // Check whether the given value is repeated within that 3x3 block
     private boolean isPossibleInBlock(int row, int col, int value) {
-        for (int i=(3*(row/3)); ((i<((3*(row/3))+3)) && (i<grid.length)); i++) {
-            for (int j=(3*(col/3)); ((j<((3*(col/3))+3)) && (j<grid[row].length)); j++) {
+        for (int i=(blockLen*(row/blockLen)); ((i<((blockLen*(row/blockLen))+blockLen)) && (i<grid.length)); i++) {
+            for (int j=(blockLen*(col/blockLen)); ((j<((blockLen*(col/blockLen))+blockLen)) && (j<grid[row].length)); j++) {
                 if ((grid[i][j] == value) && (i != row) && (j != col)) {
                     return false;
                 }
@@ -247,7 +261,110 @@
 
     // check the unique possible values within the row
     public void SecondCheck() {
-        // Test Case
+        for (int i=0; i<possible.length; i++) {
+            for (int search=min; search<=max; search++) {
+                int count = 0;
+                int cell = -1;
+                for (int j=0; j<possible[i].length; j++) {
+                    if (isExistIn(possible[i][j], search)) {
+                        count++;
+                        cell = j;
+                    }
+                }
+                if ((count == 1) && (cell != -1)) {
+                    grid[i][cell] = search;
+                    ClearPossible(i, cell, search);
+                    FillArray(possible[i][cell], 0);
+                }
+            }
+        }
+    }
+
+
+
+
+
+    // check the unique possible values within the column
+    public void ThirdCheck() {
+        for (int i=0; i<possible.length; i++) {
+            for (int search=min; search<=max; search++) {
+                int count = 0;
+                int cell = -1;
+                for (int j=0; j<possible.length; j++) {
+                    if (isExistIn(possible[j][i], search)) {
+                        count++;
+                        cell = j;
+                    }
+                }
+                if ((count == 1) && (cell != -1)) {
+                    grid[cell][i] = search;
+                    ClearPossible(cell, i, search);
+                    FillArray(possible[cell][i], 0);
+                }
+            }
+        }
+    }
+
+
+
+
+
+    // check the unique possible values within the block
+    public void FourthCheck() {
+
+        for (int i=0; i<blockLen; i++) {
+            for (int j=0; j<blockLen; j++) {
+                for (int search=min; search<=max; search++) {
+                    int count = 0;
+                    int cell_row = -1;
+                    int cell_col = -1; 
+                    for (int k=(i*blockLen); (k<((i*blockLen)+3) && (k<possible.length)); k++) {
+                        for (int l=(j*blockLen); (l<((j*blockLen)+3) && (l<possible[i].length)); l++) {
+                            if (isExistIn(possible[k][l], search)) {
+                                count++;
+                                cell_row = k;
+                                cell_col = l;
+                            }
+                        }
+                    }
+                    if ((count == 1) && (cell_row != -1) && (cell_col != -1)) {
+                        grid[cell_row][cell_col] = search;
+                        ClearPossible(cell_row, cell_col, search);
+                        FillArray(possible[cell_row][cell_col], 0);
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
+
+
+    // Chech the sudoku is solved
+    public boolean isSolved() {
+        for (int i=0; i<possible.length; i++) {
+            for (int j=0; j<possible[i].length; j++) {
+                if (grid[i][j] == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+
+
+
+    // Check whether the the given value in the given array
+    private boolean isExistIn(int[] array, int value) {
+        for (int a : array) {
+            if (a == value)
+                return true;
+        }
+        return false;
     }
 
 
@@ -270,10 +387,11 @@
         // Remove from the block
         for (int k=(3*(row/3)); ((k<((3*(row/3))+3)) && (k<grid.length)); k++) {
             for (int l=(3*(col/3)); ((l<((3*(col/3))+3)) && (l<grid[row].length)); l++) {
-                RemoveElement(possible[k][l], value);
+                if ((k != row) && (l != col)) {
+                    RemoveElement(possible[k][l], value);
+                } 
             }
         }
-
     }
 
 
@@ -314,14 +432,12 @@
 
     // Print the initial sudoku grid in the terminal
     public void printGrid() {
-        System.out.println("Valid Sudoku grid received");
         for (int row=0; row<9; row++) {
             for (int col=0; col<9; col++) {
-                System.out.print(grid[row][col] + " ");
+                System.out.print(grid[row][col] + (((col+1)%3 == 0) ? "   " : " "));
             }
-            System.out.println();
+            System.out.println(((((row+1)%3 == 0) && (row < 8)) ? "\n" : ""));
         }
-        System.out.println();
     }
 
 
