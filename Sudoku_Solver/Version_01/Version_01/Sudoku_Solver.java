@@ -20,55 +20,30 @@
 
 
 
-    // Main method for testing purpose of the Sudoku_Solver.java class
-    public static void main(String[] args) {
+    // // Main method for testing purpose of the Sudoku_Solver.java class
+    // public static void main(String[] args) {
 
-        int[][] test_grid = {
-            {0, 3, 9,   0, 0, 7,   0, 0, 5},
-            {0, 7, 0,   9, 1, 0,   0, 2, 0},
-            {5, 4, 0,   0, 0, 0,   0, 0, 1},
+    //     int[][] test_grid = {
+    //         {0, 7, 0,   0, 0, 0,   0, 0, 3},
+    //         {0, 2, 6,   0, 0, 3,   9, 0, 0},
+    //         {1, 0, 3,   2, 8, 0,   0, 0, 5},
 
-            {2, 6, 4,   3, 8, 9,   0, 0, 0},
-            {0, 0, 9,   0, 0, 0,   3, 8, 0},
-            {0, 0, 8,   0, 0, 0,   0, 0, 0},
+    //         {0, 0, 0,   0, 3, 0,   0, 0, 0},
+    //         {9, 3, 5,   4, 2, 6,   0, 0, 0},
+    //         {0, 0, 0,   0, 9, 0,   3, 5, 0},
 
-            {4, 0, 7,   8, 0, 1,   0, 0, 3},
-            {0, 0, 0,   0, 5, 0,   0, 0, 8},
-            {0, 8, 0,   6, 4, 0,   0, 9, 0},
-        };
+    //         {0, 8, 7,   0, 4, 2,   0, 0, 0},
+    //         {0, 0, 0,   8, 0, 9,   0, 0, 2},
+    //         {2, 4, 0,   0, 0, 0,   6, 0, 8},
+    //     };
 
-        Sudoku_Solver ss = new Sudoku_Solver(test_grid, 1, 9);
+    //     Sudoku_Solver ss = new Sudoku_Solver(test_grid, 1, 9);
+    //     System.out.println();
+    //     ss.printGrid();
+    //     ss.solveSudoku();
+    //     ss.printGrid();
 
-        
-        if (ss.CheckValidInit()) {
-            ss.CalculatePossible();
-
-            System.out.println();
-
-            System.out.println("Given Sudoku grid...");
-            ss.printGrid();
-            System.out.println();
-
-            int iter = 0;
-            while (!ss.isSolved()) {
-                iter++;
-                ss.FirstCheck();
-                ss.SecondCheck();
-                ss.ThirdCheck();
-                ss.FourthCheck();
-            }
-
-            System.out.println("Solved Sudoku grid...");
-            ss.printGrid();
-            System.out.printf("Performed iteration count :- %03d \n\n", iter);
-            
-            
-        } else {
-            System.out.println("Invalid initial sudoku grid");
-        }
-
-
-    }
+    // }
 
 
 
@@ -77,7 +52,7 @@
     // Constructor
     public Sudoku_Solver(int[][] grid, int min, int max) {
         this.grid = grid;
-        this.possible = new int[9][9][9];
+        this.possible = new int[max][max][max];
         this.min = min;
         this.max = max;
         blockLen = (int)(Math.sqrt(max));
@@ -87,8 +62,35 @@
 
 
 
+    // function for the use
+    public boolean solveSudoku() {
+
+        if (CheckValidInit()) {
+
+            CalculatePossible();
+
+            int iter = 0;
+
+            while ((!isSolved()) && (iter<=100)) {
+                iter++;
+                FirstCheck();
+                SecondCheck();
+                ThirdCheck();
+                FourthCheck();
+            }   
+
+            return (iter>100) ? false : true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
     // Check the validity of the given initial sudoku grid
-    public boolean CheckValidInit() {
+    private boolean CheckValidInit() {
         for (int i=0; i<grid.length; i++) {
             for (int j=0; j<grid[i].length; j++) {
                 if (grid[i][j] != 0) {
@@ -106,7 +108,7 @@
 
 
     // calculating all possible values for each cell
-    public void CalculatePossible() {
+    private void CalculatePossible() {
         // Assign 0 as a initial value of possible array
         for (int i=0; i<grid.length; i++) {
             for (int j=0; j<grid[i].length; j++) {
@@ -244,7 +246,7 @@
 
 
     // Check and update there is any cell with only one possible value
-    public void FirstCheck() {
+    private void FirstCheck() {
         for (int i=0; i<grid.length; i++) {
             for (int j=0; j<grid[i].length; j++) {
                 if ((CountPossible(possible[i][j]) == 1) && (grid[i][j] == 0)){
@@ -260,7 +262,7 @@
 
 
     // check the unique possible values within the row
-    public void SecondCheck() {
+    private void SecondCheck() {
         for (int i=0; i<possible.length; i++) {
             for (int search=min; search<=max; search++) {
                 int count = 0;
@@ -285,7 +287,7 @@
 
 
     // check the unique possible values within the column
-    public void ThirdCheck() {
+    private void ThirdCheck() {
         for (int i=0; i<possible.length; i++) {
             for (int search=min; search<=max; search++) {
                 int count = 0;
@@ -310,7 +312,7 @@
 
 
     // check the unique possible values within the block
-    public void FourthCheck() {
+    private void FourthCheck() {
 
         for (int i=0; i<blockLen; i++) {
             for (int j=0; j<blockLen; j++) {
@@ -343,7 +345,7 @@
 
 
     // Chech the sudoku is solved
-    public boolean isSolved() {
+    private boolean isSolved() {
         for (int i=0; i<possible.length; i++) {
             for (int j=0; j<possible[i].length; j++) {
                 if (grid[i][j] == 0) {
@@ -418,7 +420,7 @@
 
 
     // Print a sample array for testing
-    public void printArray(int[] array, String title) {
+    private void printArray(int[] array, String title) {
         System.out.println("Array " + title.toLowerCase() + "...");
         for (int i=0; i<array.length; i++) {
             System.out.printf("%d ", array[i]);
@@ -431,7 +433,7 @@
 
 
     // Print the initial sudoku grid in the terminal
-    public void printGrid() {
+    private void printGrid() {
         for (int row=0; row<9; row++) {
             for (int col=0; col<9; col++) {
                 System.out.print(grid[row][col] + (((col+1)%3 == 0) ? "   " : " "));
@@ -445,7 +447,7 @@
 
 
     // Print the calculated all possible values for each cell in the terminal
-    public void printPossible() {
+    private void printPossible() {
         for (int i=0; i<possible.length; i++) {
             System.out.printf("Row no. %02d : \n", i+1);
             for (int j=0; j<possible[i].length; j++) {

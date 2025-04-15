@@ -3,8 +3,10 @@ package Version_01;
 
 import java.awt.Color;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 
 public class interface_01 extends javax.swing.JFrame {
@@ -748,7 +750,8 @@ public class interface_01 extends javax.swing.JFrame {
         pack();
     }                                                         
 
-    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {  
+        btn_solve.setEnabled(true);                                        
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 JTextField cell = getCellComponent(row, col);
@@ -760,7 +763,10 @@ public class interface_01 extends javax.swing.JFrame {
         }
     }                                         
     
-    private void btn_solveActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btn_solveActionPerformed(java.awt.event.ActionEvent evt) {  
+        
+        btn_solve.setEnabled(false);
+        btn_reset.setEnabled(false);
 
         ArrayList<String> invalidCells = new ArrayList<>();
     
@@ -797,10 +803,68 @@ public class interface_01 extends javax.swing.JFrame {
                 String.join("\n", invalidCells),
                 "Invalid Input",
                 JOptionPane.WARNING_MESSAGE);
+            btn_solve.setEnabled(true);
+            btn_reset.setEnabled(true);
             return;
         }
+
+        // Copy the input array for usage of class
+        int[][] grid_result = new int[grid.length][grid.length];
+        for (int i=0; i<grid.length; i++) {
+            for (int j=0; j<grid[i].length; j++) {
+                grid_result[i][j] = grid[i][j];
+            }
+        }
+
+        Sudoku_Solver ss = new Sudoku_Solver(grid_result, 1, 9);
+        
+        // Solved
+        if (ss.solveSudoku()) {
+            for (int i=0; i<grid.length; i++) {
+                for (int j=0; j<grid[i].length; j++) {
+
+                    JTextField cell = getCellComponent(i, j);
+
+                    if (grid[i][j] == 0) {
+                        animateOutput(true, cell, grid_result[i][j]);
+                    }
+
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "Given hint values are not enough to solve this Sudoku\n" +
+                String.join("\n", invalidCells),
+                "Incomplete hints",
+                JOptionPane.WARNING_MESSAGE);
+        }
+        btn_reset.setEnabled(true);
+    }
+
+
+    // Output animation
+    private void animateOutput(boolean animation, JTextField cell, int value) {
+        if (!animation) {
+            cell.setText(String.valueOf(value));
+            cell.setForeground(Color.BLUE);
+            return;
+        }
+
+        int[] count = {1};
+        Timer timer = new Timer(1000, e -> {
+            if (count[0] < value) {
+                cell.setText(String.valueOf(count[0]++));
+            } else {
+                cell.setText(String.valueOf(value));
+                cell.setForeground(Color.BLUE);
+                ((Timer)e.getSource()).stop();
+
+                new Timer(1000, ev -> {}).start();
+            }
+        });
+        timer.start();
+    }
     
-    }                                         
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {                                         
         System.exit(0);
@@ -820,13 +884,34 @@ public class interface_01 extends javax.swing.JFrame {
         return grid;
     }
 
-    public void invalidHintWarning(Sudoku_Solver obj) {
-        if (!obj.CheckValidInit()) {
-            JOptionPane.showMessageDialog(this, "Invalid input detected !!!", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+    public static void main(String args[]) {
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(interface_01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(interface_01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(interface_01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(interface_01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new interface_01().setVisible(true);
+            }
+        });
     }
     
-    private final int[][] grid = new int[9][9];
+    private int[][] grid = new int[9][9];
 
     // Variables declaration                   
     private javax.swing.JPanel SudokuPanel;
