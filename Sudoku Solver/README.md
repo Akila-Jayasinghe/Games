@@ -15,6 +15,6 @@ A Java-based Sudoku puzzle solver with intuitive GUI, supporting both manual inp
 
 ### Running the Application
 1. **Download the code**:
-   code is still run with an IDE the JAR & EXE files will be uploaded soon
+   code is still run with an IDE; JAR & EXE files will be uploaded soon
      - git clone https://github.com/yourusername/Sudoku-Solver.git
      - cd Sudoku-Solver
