@@ -860,10 +860,13 @@ public class SudokuSolver extends javax.swing.JFrame {
                 cell.setText(String.valueOf(count[0]++));
             } else {
                 cell.setText(String.valueOf(value));
-                cell.setForeground(Color.BLUE);
+                
                 ((Timer)e.getSource()).stop();
 
-                // new Timer(1000, ev -> {}).start();
+                new Timer(1000, ev -> {
+                    cell.setForeground(Color.BLUE);
+                    ((Timer)ev.getSource()).stop();
+                }).start();
             }
         });
         timer.start();
