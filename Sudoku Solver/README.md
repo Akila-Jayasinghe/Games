@@ -2,7 +2,7 @@
 
 A Java-based Sudoku puzzle solver with intuitive GUI, supporting both manual input and automatic solving.
 
-<img src="Screen_Shots/ss_01.png" alt="Sudoku Solver Screenshot 01" style="width:30%; height:auto;" /> &nbsp;&nbsp;&nbsp; <img src="Screen_Shots/ss_02.png" alt="Sudoku Solver Screenshot 02" style="width:30%; height:auto;" /> &nbsp;&nbsp;&nbsp; <img src="Screen_Shots/ss_03.png" alt="Sudoku Solver Screenshot 03" style="width:30%; height:auto;" />
+ &nbsp;&nbsp;&nbsp; <img src="Screen_Shots/ss_01.png" alt="Sudoku Solver Screenshot 01" style="width:30%; height:auto;" /> &nbsp;&nbsp;&nbsp; <img src="Screen_Shots/ss_02.png" alt="Sudoku Solver Screenshot 02" style="width:30%; height:auto;" /> &nbsp;&nbsp;&nbsp; <img src="Screen_Shots/ss_03.png" alt="Sudoku Solver Screenshot 03" style="width:30%; height:auto;" /> &nbsp;&nbsp;&nbsp; 
 
 ## Tools
 - User Interface was designed by using Java swing UI designer in Apache NetBeans
