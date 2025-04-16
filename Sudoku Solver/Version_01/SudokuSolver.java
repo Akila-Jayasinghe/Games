@@ -1,7 +1,6 @@
 
 package Version_01;
 
-
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -807,6 +806,7 @@ public class SudokuSolver extends javax.swing.JFrame {
                 String.join("\n", invalidCells),
                 "Invalid Input",
                 JOptionPane.WARNING_MESSAGE);
+            acticeCells(true);
             btn_solve.setEnabled(true);
             btn_reset.setEnabled(true);
             return;
@@ -881,6 +881,14 @@ public class SudokuSolver extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    private void acticeCells(boolean state) {
+        for (int i=0; i<grid.length; i++) {
+            for (int j=0; j<grid[i].length; j++) {
+                getCellComponent(i, j).setEditable(state);
+            }
         }
     }
     

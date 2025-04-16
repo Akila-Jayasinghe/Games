@@ -2,6 +2,10 @@
 
 A Java-based Sudoku puzzle solver with intuitive GUI, supporting both manual input and automatic solving.
 
+![Screenshot](Screen_Shots/ss_01.png) <!-- Add a screenshot later -->
+![Screenshot](Screen_Shots/ss_02.png) <!-- Add a screenshot later -->
+![Screenshot](Screen_Shots/ss_03.png) <!-- Add a screenshot later -->
+
 ## Tools
 - User Interface was designed by using Java swing UI designer in Apache NetBeans
 
